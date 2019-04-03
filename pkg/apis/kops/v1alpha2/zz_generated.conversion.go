@@ -2875,6 +2875,8 @@ func autoConvert_v1alpha2_KubeletConfigSpec_To_kops_KubeletConfigSpec(in *Kubele
 	out.RootDir = in.RootDir
 	out.AuthenticationTokenWebhook = in.AuthenticationTokenWebhook
 	out.AuthenticationTokenWebhookCacheTTL = in.AuthenticationTokenWebhookCacheTTL
+	out.CPUCFSQuota = in.CPUCFSQuota
+	out.CPUCFSQuotaPeriod = in.CPUCFSQuotaPeriod
 	out.CpuManagerPolicy = in.CpuManagerPolicy
 	return nil
 }
@@ -2952,6 +2954,8 @@ func autoConvert_kops_KubeletConfigSpec_To_v1alpha2_KubeletConfigSpec(in *kops.K
 	out.RootDir = in.RootDir
 	out.AuthenticationTokenWebhook = in.AuthenticationTokenWebhook
 	out.AuthenticationTokenWebhookCacheTTL = in.AuthenticationTokenWebhookCacheTTL
+	out.CPUCFSQuota = in.CPUCFSQuota
+	out.CPUCFSQuotaPeriod = in.CPUCFSQuotaPeriod
 	out.CpuManagerPolicy = in.CpuManagerPolicy
 	return nil
 }
