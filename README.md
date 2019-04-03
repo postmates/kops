@@ -8,7 +8,8 @@
 [GoDoc Widget]: https://godoc.org/k8s.io/kops?status.svg
 
 
-The easiest way to get a production grade Kubernetes cluster up and running.
+## Postmates fork of KOPS
+Don't attempt to submit upstream from here. You are the dri for your upstream submissions, therefore, they should come from your private forks. This fork exists to act as a consolidation point of our internal build of kops. Once your pr is merged, or approved internally, push it here.
 
 
 ## What is kops?
