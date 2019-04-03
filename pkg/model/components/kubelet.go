@@ -64,14 +64,6 @@ func (b *KubeletOptionsBuilder) BuildOptions(o interface{}) error {
 	clusterSpec.Kubelet.ClusterDomain = clusterSpec.ClusterDNSDomain
 	clusterSpec.Kubelet.NonMasqueradeCIDR = clusterSpec.NonMasqueradeCIDR
 
-	if clusterSpec.Kubelet.ClusterDNS == "" {
-		ip, err := WellKnownServiceIP(clusterSpec, 10)
-		if err != nil {
-			return err
-		}
-		clusterSpec.Kubelet.ClusterDNS = ip.String()
-	}
-
 	if b.Context.IsKubernetesLT("1.7") {
 		// babysit-daemons removed in 1.7
 		clusterSpec.Kubelet.BabysitDaemons = fi.Bool(true)

@@ -22,6 +22,7 @@ import (
 	"fmt"
 	"path"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws/ec2metadata"
@@ -197,6 +198,26 @@ func (b *KubeletBuilder) buildSystemdEnvironmentFile(kubeletConfig *kops.Kubelet
 	if b.Cluster.Spec.CloudConfig != nil {
 		flags += " --cloud-config=" + CloudConfigFilePath
 	}
+
+	sess := session.Must(session.NewSession())
+	metadata := ec2metadata.New(sess)
+	localIpv4, err := metadata.GetMetadata("local-ipv4")
+	if err != nil {
+		return nil, fmt.Errorf("error fetching the local-ipv4 address from the ec2 meta-data: %v", err)
+	}
+
+	old_cluster_dns_key := -1
+	flags_array := strings.Fields(flags)
+	for i := range flags_array {
+		if strings.HasPrefix(flags_array[i], "--cluster-dns=") {
+			old_cluster_dns_key = i
+		}
+	}
+	if old_cluster_dns_key >= 0 {
+		flags_array = append(flags_array[:old_cluster_dns_key], flags_array[old_cluster_dns_key+1:]...)
+		flags = strings.Join(flags_array, " ")
+	}
+	flags += " --cluster-dns=" + localIpv4
 
 	if b.UsesCNI() {
 		flags += " --cni-bin-dir=" + b.CNIBinDir()
@@ -581,7 +602,7 @@ func (b *KubeletBuilder) buildMasterKubeletKubeconfig() (*nodetasks.File, error)
 
 	template := &x509.Certificate{
 		BasicConstraintsValid: true,
-		IsCA: false,
+		IsCA:                  false,
 	}
 
 	template.Subject = pkix.Name{
