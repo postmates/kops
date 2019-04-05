@@ -2869,6 +2869,7 @@ func autoConvert_v1alpha2_KubeletConfigSpec_To_kops_KubeletConfigSpec(in *Kubele
 	out.RuntimeRequestTimeout = in.RuntimeRequestTimeout
 	out.VolumeStatsAggPeriod = in.VolumeStatsAggPeriod
 	out.FailSwapOn = in.FailSwapOn
+	out.ExperimentalAllowedUnsafeSysctls = in.ExperimentalAllowedUnsafeSysctls
 	out.AllowedUnsafeSysctls = in.AllowedUnsafeSysctls
 	out.StreamingConnectionIdleTimeout = in.StreamingConnectionIdleTimeout
 	out.DockerDisableSharedPID = in.DockerDisableSharedPID
@@ -2948,6 +2949,7 @@ func autoConvert_kops_KubeletConfigSpec_To_v1alpha2_KubeletConfigSpec(in *kops.K
 	out.RuntimeRequestTimeout = in.RuntimeRequestTimeout
 	out.VolumeStatsAggPeriod = in.VolumeStatsAggPeriod
 	out.FailSwapOn = in.FailSwapOn
+	out.ExperimentalAllowedUnsafeSysctls = in.ExperimentalAllowedUnsafeSysctls
 	out.AllowedUnsafeSysctls = in.AllowedUnsafeSysctls
 	out.StreamingConnectionIdleTimeout = in.StreamingConnectionIdleTimeout
 	out.DockerDisableSharedPID = in.DockerDisableSharedPID
